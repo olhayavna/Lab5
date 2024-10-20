@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тікаюча кнопка з предметами</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff; /* Світло-блакитний фон */
+            position: relative;
+            margin: 0;
+        }
+
+        #question {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333; /* Темно-сірий колір */
+            text-align: center;
+        }
+
+        .button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        #noButton {
+            background: linear-gradient(45deg, #ff6347, #ff4500); /* Градієнт */
+            color: white;
+        }
+
+        #yesButton {
+            background: linear-gradient(45deg, #32cd32, #228b22); /* Градієнт */
+            color: white;
+        }
+
+        .item {
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            display: inline-block;
+            background-color: #4682b4; /* Синій колір */
+            border-radius: 10px; /* Закруглені кути */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Анімація */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тінь */
+        }
+        
+        /* Стилі для предметів при наведенні */
+        .item:hover {
+            transform: scale(1.1); /* Збільшення предмету */
+        }
+    </style>
+</head>
+<body>
+
+<div id="question">Ви мені поставите 5 за лабораторну?</div>
+<button id="yesButton" class="button">Так</button>
+<button id="noButton" class="button" onmouseover="moveButton()">Ні</button>
+
+<!-- Додаємо предмети -->
+<div id="itemsContainer">
+    <div class="item" onmouseover="changeColor(this)" onmouseout="resetColor(this)"></div>
+    <div class="item" onmouseover="changeColor(this)" onmouseout="resetColor(this)"></div>
+    <div class="item" onmouseover="changeColor(this)" onmouseout="resetColor(this)"></div>
+</div>
+
+<script>
+    // Функція для переміщення кнопки "Ні"
+    function moveButton() {
+        const noButton = document.getElementById("noButton");
+        const buttonWidth = noButton.offsetWidth;
+        const buttonHeight = noButton.offsetHeight;
+        const maxX = window.innerWidth - buttonWidth;
+        const maxY = window.innerHeight - buttonHeight;
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+        
+        noButton.style.position = 'absolute';
+        noButton.style.left = randomX + 'px';
+        noButton.style.top = randomY + 'px';
+    }
+
+    // Обробник події для кнопки "Так"
+    document.getElementById("yesButton").addEventListener("click", function() {
+        alert("Дякую! Ви найкращі!");
+    });
+
+    // Функція для зміни кольору предмету
+    function changeColor(item) {
+        item.style.backgroundColor = 'orange'; // Зміна кольору на оранжевий
+    }
+
+    // Функція для скидання кольору предмету
+    function resetColor(item) {
+        item.style.backgroundColor = '#4682b4'; // Скидання кольору назад на синій
+    }
+</script>
+
+</body>
+</html>
